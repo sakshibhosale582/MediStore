@@ -1,10 +1,11 @@
 FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
+    libicu-dev \
     libzip-dev \
     zip \
     unzip \
-    && docker-php-ext-install mysqli pdo pdo_mysql
+    && docker-php-ext-install intl mysqli pdo pdo_mysql
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
