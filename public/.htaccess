@@ -4,7 +4,7 @@ Options -Indexes
 # Rewrite engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /MediStore/public/
+    RewriteBase /
 
     # Redirect Trailing Slashes
     RewriteCond %{REQUEST_FILENAME} !-d

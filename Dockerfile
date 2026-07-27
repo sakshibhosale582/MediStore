@@ -17,7 +17,13 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN a2enmod rewrite
 
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+RUN printf '<VirtualHost *:80>\n\
+DocumentRoot /var/www/html/public\n\
+<Directory /var/www/html/public>\n\
+AllowOverride All\n\
+Require all granted\n\
+</Directory>\n\
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 RUN mkdir -p /var/www/html/writable/cache \
     /var/www/html/writable/logs \
@@ -25,6 +31,7 @@ RUN mkdir -p /var/www/html/writable/cache \
     /var/www/html/writable/uploads \
     && chown -R www-data:www-data /var/www/html/writable \
     && chmod -R 777 /var/www/html/writable
+
 EXPOSE 80
 
 CMD ["apache2-foreground"]
