@@ -1,0 +1,1 @@
+document.querySelectorAll('form').forEach((form) => form.addEventListener('submit', () => { const button = form.querySelector('button[type="submit"]'); if (button && !button.dataset.loading) { button.dataset.loading = 'true'; button.classList.add('is-loading'); } }));
